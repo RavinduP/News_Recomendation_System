@@ -16,7 +16,9 @@ public class Main {
             System.out.println("1. Register");
             System.out.println("2. Login");
             System.out.println("3. Exit");
+            System.out.println("3. test");
             System.out.print("Enter your choice: ");
+
 
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
