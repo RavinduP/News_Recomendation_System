@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.ood_cw.HomeController">
+    <children>
+        <Label text="Welcome to the News Recommendation System!" layoutX="100.0" layoutY="50.0"/>
+        <Button text="Browse News" layoutX="100.0" layoutY="100.0"/>
+        <Button text="Logout" layoutX="100.0" layoutY="150.0" onAction="#onLogoutButtonClick"/>
+    </children>
+</AnchorPane>
