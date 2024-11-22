@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="615.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.ood_cw.HomeController">
+    <!-- Background Image -->
+    <children>
+        <ImageView fx:id="backgroundImage" fitHeight="615.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="false">
+            <image>
+                <Image url="@../../../images/img4.jpg" /> <!-- Update path as needed -->
+            </image>
+        </ImageView>
+      <Pane layoutX="181.0" layoutY="75.0" prefHeight="395.0" prefWidth="471.0" style="-fx-background-color: rgba(255, 255, 255, 0.9);">
+         <children>
+            <Label layoutX="137.0" layoutY="17.0" prefHeight="29.0" prefWidth="244.0" text="Create New Account" textFill="#e71919">
+               <font>
+                  <Font name="Times New Roman Bold Italic" size="25.0" />
+               </font></Label>
+            <TextField alignment="CENTER" layoutX="57.0" layoutY="167.0" prefHeight="29.0" prefWidth="160.0" promptText="First Name" style="-fx-background-radius: 15px; -fx-background-color: #E1E1E1;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></TextField>
+            <ImageView fitHeight="69.0" fitWidth="83.0" layoutX="199.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/user.png" />
+               </image>
+            </ImageView>
+            <TextField alignment="CENTER" layoutX="248.0" layoutY="167.0" prefHeight="29.0" prefWidth="160.0" promptText="Last Name" style="-fx-background-color: #E1E1E1; -fx-background-radius: 15px;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></TextField>
+            <TextField layoutX="57.0" layoutY="214.0" prefHeight="29.0" prefWidth="350.0" promptText="User Name" style="-fx-background-color: #E1E1E1; -fx-background-radius: 15px; -fx-padding: 0 0 0 25;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></TextField>
+            <TextField layoutX="57.0" layoutY="303.0" prefHeight="29.0" prefWidth="350.0" promptText="Password" style="-fx-background-radius: 15px; -fx-background-color: #E1E1E1; -fx-padding: 0 0 0 25;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></TextField>
+            <TextField layoutX="57.0" layoutY="258.0" prefHeight="29.0" prefWidth="350.0" promptText="Email Address" style="-fx-background-color: #E1E1E1; -fx-background-radius: 15px; -fx-padding: 0 0 0 25;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></TextField>
+         </children></Pane>
+      <Button layoutX="340.0" layoutY="411.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="56.0" text="Button" />
+    </children>
+</AnchorPane>

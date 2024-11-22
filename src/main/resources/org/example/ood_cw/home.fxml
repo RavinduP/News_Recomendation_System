@@ -1,11 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.ood_cw.HomeController">
-    <children>
-        <Label text="Welcome to the News Recommendation System!" layoutX="100.0" layoutY="50.0"/>
-        <Button text="Browse News" layoutX="100.0" layoutY="100.0"/>
-        <Button text="Logout" layoutX="100.0" layoutY="150.0" onAction="#onLogoutButtonClick"/>
-    </children>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="615.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.ood_cw.HomeController">
+   <!-- Background Image -->
+   <children>
+      <ImageView fx:id="backgroundImage" fitHeight="615.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="false">
+         <image>
+            <Image url="@../../../images/img3.jpg" /> <!-- Update path as needed -->
+         </image>
+      </ImageView>
+
+      <!-- Translucent Login Box -->
+      <VBox alignment="CENTER" layoutX="274.0" layoutY="95.0" prefHeight="347.0" prefWidth="318.0" spacing="15.0" style="-fx-background-color: rgba(255, 255, 255, 0.8); -fx-background-radius: 15px; -fx-padding: 20;">
+         <children>
+            <!-- Title -->
+            <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="LOGIN">
+               <font>
+                  <Font name="Times New Roman" size="18.0" />
+               </font></Label>
+      
+            <!-- Email Address -->
+            <Label prefHeight="22.0" prefWidth="289.0" text="Email Address" textAlignment="JUSTIFY">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="emailField" alignment="CENTER" prefHeight="16.0" prefWidth="218.0" promptText="Enter your email" />
+      
+            <!-- Password -->
+            <Label prefHeight="22.0" prefWidth="303.0" text="Password">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="passwordField" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="19.0" prefWidth="280.0" promptText="Enter your password" />
+      
+                  <!-- Login Button -->
+            <Button fx:id="loginButton" prefWidth="120.0" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 14px;" text="Login" />
+      
+            <!-- Create Account Button -->
+            <Button style="-fx-background-color: transparent; -fx-text-fill: #007bff; -fx-font-size: 12px;" text="Create New Account" />
+      
+            <!-- Forgot Password Button -->
+            <Button style="-fx-background-color: transparent; -fx-text-fill: #007bff; -fx-font-size: 12px;" text="Forgot Password?" />
+         </children>
+      </VBox>
+   </children>
 </AnchorPane>
