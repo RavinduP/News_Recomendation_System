@@ -31,8 +31,6 @@ public class HelloController {
         // Optional: Add any setup code if needed
     }
 
-
-
     // Handle Login Button Action
     @FXML
     private void handleLoginAction() {
@@ -50,15 +48,28 @@ public class HelloController {
             return;
         }
 
-        // Check login credentials
-        boolean success = DatabaseHelper.checkLogin(email, password);
-        if (success) {
-            showAlert("Success", "Login successful!", Alert.AlertType.INFORMATION);
-        } else {
-            showAlert("Error", "Invalid email or password. Please try again.", Alert.AlertType.ERROR);
+        try {
+            // Check if the login is for a user or an admin
+            boolean isUser = DatabaseHelper.checkLogin(email, password); // Check user credentials
+            boolean isAdmin = DatabaseHelper.checkAdminLogin(email, password); // Check admin credentials
+
+            if (isUser) {
+                // User logged in successfully, navigate to user dashboard
+                showAlert("Success", "User login successful!", Alert.AlertType.INFORMATION);
+                navigateToDashboard("UserArticle.fxml"); // Load the user dashboard
+            } else if (isAdmin) {
+                // Admin logged in successfully, navigate to admin dashboard
+                showAlert("Success", "Admin login successful!", Alert.AlertType.INFORMATION);
+                navigateToDashboard("Admindash.fxml"); // Load the admin dashboard
+            } else {
+                // Invalid credentials for both user and admin
+                showAlert("Error", "Invalid email or password. Please try again.", Alert.AlertType.ERROR);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Error", "An error occurred during login. Please try again later.", AlertType.ERROR);
         }
     }
-
 
     // Handle Create Account Button Action
     @FXML
@@ -86,6 +97,31 @@ public class HelloController {
     private void handleForgotPasswordAction() {
         // Logic for password recovery
         showAlert("Info", "Forgot Password button clicked.", AlertType.INFORMATION);
+    }
+
+    // Utility method to navigate to a specific dashboard based on user/admin login
+    private void navigateToDashboard(String fxmlFile) {
+        try {
+            // Load the corresponding FXML file (either user or admin dashboard)
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlFile));
+            Parent dashboardRoot = fxmlLoader.load();
+
+            // Get the current stage (window) and set the new scene
+            Stage stage = (Stage) loginButton.getScene().getWindow();
+            Scene dashboardScene = new Scene(dashboardRoot);
+            stage.setScene(dashboardScene);
+
+            // Optionally set the title of the stage
+            if (fxmlFile.equals("UserArticle.fxml")) {
+                stage.setTitle("User Dashboard");
+            } else if (fxmlFile.equals("Admindash.fxml")) {
+                stage.setTitle("Admin Dashboard");
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Error", "Unable to load the dashboard screen.", Alert.AlertType.ERROR);
+        }
     }
 
     // Utility method to show alerts
