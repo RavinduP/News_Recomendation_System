@@ -77,19 +77,25 @@ public class DatabaseHelper {
             return false;  // In case of an error, return false
         }
     }
+
+
+    private static Connection getConnection() throws SQLException {
+        // Implement your DB connection here
+        return DriverManager.getConnection("your_database_url", "username", "password");
+    }
     public static ObservableList<Article> getArticlesByCategory(String category) {
         ObservableList<Article> articles = FXCollections.observableArrayList();
-        String query = "SELECT * FROM articles_dataset WHERE category = ?";
+        String query;
 
-        // If "All" is selected, we fetch all articles
         if (category.equalsIgnoreCase("All")) {
-            query = "SELECT * FROM articles_dataset";  // No WHERE clause, get all articles
+            query = "SELECT article_id, title, content, category, publish_date FROM articles_dataset";
+        } else {
+            query = "SELECT article_id, title, content, category, publish_date FROM articles_dataset WHERE category = ?";
         }
 
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
-            // Set the category parameter (if not "All")
             if (!category.equalsIgnoreCase("All")) {
                 preparedStatement.setString(1, category);
             }
@@ -97,19 +103,24 @@ public class DatabaseHelper {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
+                String articleId = resultSet.getString("article_id");
                 String title = resultSet.getString("title");
-                String content = resultSet.getString("content");
-                String cat = resultSet.getString("category");
+                String categoryValue = resultSet.getString("category");
                 String publishDate = resultSet.getString("publish_date");
+                String content = resultSet.getString("content");
 
                 // Add the article to the list
-                articles.add(new Article(title, cat, publishDate));
+                articles.add(new Article(articleId, title, categoryValue, publishDate, content));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         return articles;
+    }
+
+    public static Article getArticleByIdOrTitle(String articleId, String title) {
+        return null;
     }
 }
 

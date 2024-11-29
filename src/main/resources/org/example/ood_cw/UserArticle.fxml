@@ -32,19 +32,20 @@
         </Label>
 
         <!-- Table for displaying articles -->
-        <TableView fx:id="articleTable" layoutX="100.0" layoutY="180.0" onSort="#initialize" prefHeight="400.0" prefWidth="600.0">
+        <TableView fx:id="articleTable" layoutX="108.0" layoutY="166.0" onSort="#initialize" prefHeight="400.0" prefWidth="601.0">
             <columns>
-                <TableColumn fx:id="colTitle" prefWidth="200.0" text="Title">
+            <TableColumn fx:id="colArticleId" prefWidth="75.0" text="Article_id" />
+                <TableColumn fx:id="colTitle" prefWidth="232.00001525878906" text="Title">
                     <cellValueFactory>
                         <PropertyValueFactory />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="colCategory" prefWidth="150.0" text="Category">
+                <TableColumn fx:id="colCategory" prefWidth="148.0" text="Category">
                     <cellValueFactory>
                         <PropertyValueFactory property="category" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="colPublishDate" prefWidth="150.0" text="Publish Date">
+                <TableColumn fx:id="colPublishDate" prefWidth="144.80001220703127" text="Publish Date">
                     <cellValueFactory>
                         <PropertyValueFactory property="publishDate" />
                     </cellValueFactory>

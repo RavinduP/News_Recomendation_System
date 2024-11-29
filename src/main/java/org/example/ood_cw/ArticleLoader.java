@@ -15,13 +15,15 @@ public class ArticleLoader {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
-                // Assuming CSV format: Title, Category, PublishDate
+                // Assuming CSV format: ArticleId, Title, Category, PublishDate, Content
                 String[] data = line.split(",");
-                if (data.length == 3) {
-                    String title = data[0];
-                    String category = data[1];
-                    String publishDate = data[2];
-                    articles.add(new Article(title, category, publishDate));
+                if (data.length == 5) { // Ensure there are exactly 5 fields
+                    String articleId = data[0];
+                    String title = data[1];
+                    String category = data[2];
+                    String publishDate = data[3];
+                    String content = data[4]; // Read the 'content' field from CSV
+                    articles.add(new Article(articleId, title, category, publishDate, content));
                 }
             }
         } catch (IOException e) {

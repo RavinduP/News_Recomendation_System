@@ -3,18 +3,35 @@ package org.example.ood_cw;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Article {
+    private SimpleStringProperty articleId;
     private SimpleStringProperty title;
     private SimpleStringProperty category;
     private SimpleStringProperty publishDate;
+    private SimpleStringProperty content;  // Add content property
 
-    // Constructor
-    public Article(String title, String category, String publishDate) {
+    // Updated constructor to include content
+    public Article(String articleId, String title, String category, String publishDate, String content) {
+        this.articleId = new SimpleStringProperty(articleId);
         this.title = new SimpleStringProperty(title);
         this.category = new SimpleStringProperty(category);
         this.publishDate = new SimpleStringProperty(publishDate);
+        this.content = new SimpleStringProperty(content);  // Initialize content property
     }
 
     // Getter and Setter methods for the properties
+
+    public String getArticleId() {
+        return articleId.get();
+    }
+
+    public void setArticleId(String articleId) {
+        this.articleId.set(articleId);
+    }
+
+    public SimpleStringProperty articleIdProperty() {
+        return articleId;
+    }
+
     public String getTitle() {
         return title.get();
     }
@@ -49,5 +66,17 @@ public class Article {
 
     public SimpleStringProperty publishDateProperty() {
         return publishDate;
+    }
+
+    public String getContent() {
+        return content.get();  // Return the actual content
+    }
+
+    public void setContent(String content) {
+        this.content.set(content);
+    }
+
+    public SimpleStringProperty contentProperty() {
+        return content;
     }
 }
