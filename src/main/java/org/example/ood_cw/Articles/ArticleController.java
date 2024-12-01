@@ -4,9 +4,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -28,6 +27,11 @@ public class ArticleController {
     private TableColumn<Article, String> colPublishDate;
     @FXML
     private TableColumn<Article, String> colArticleId;
+    @FXML
+    private TextField searchTextField;  // Search input field
+    @FXML
+    private Button searchButton;       // Search button
+
 
     @FXML
     private Button btnAll;
@@ -44,20 +48,53 @@ public class ArticleController {
     @FXML
     private Button btnFinance;
 
+
     @FXML
     private void initialize() {
-        // Setup the columns for TableView
-        colArticleId.setCellValueFactory(cellData -> cellData.getValue().articleIdProperty());
-        colTitle.setCellValueFactory(cellData -> cellData.getValue().titleProperty());
-        colCategory.setCellValueFactory(cellData -> cellData.getValue().categoryProperty());
-        colPublishDate.setCellValueFactory(cellData -> cellData.getValue().publishDateProperty());
+        // Setup columns in the table
+        colArticleId.setCellValueFactory(new PropertyValueFactory<>("articleId"));
+        colTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+        colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
+        colPublishDate.setCellValueFactory(new PropertyValueFactory<>("publishDate"));
 
-        // Load all articles by default
-        loadArticles("All");
-
-        // Add row click listener to navigate to article details
-        articleTable.setOnMouseClicked(this::handleRowClick);
+        // Handle double-click on article row
+        articleTable.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) { // Check if double-clicked
+                Article selectedArticle = articleTable.getSelectionModel().getSelectedItem();
+                if (selectedArticle != null) {
+                    navigateToArticleDetails(selectedArticle);
+                }
+            }
+        });
     }
+
+    @FXML
+    private void handleSearchButtonAction(ActionEvent event) {
+        String searchQuery = searchTextField.getText().trim();
+
+        if (searchQuery.isEmpty()) {
+            showError("Please enter a search term.");
+            return;
+        }
+
+        // Fetch articles from the database based on the search query
+        ObservableList<Article> searchResults = DatabaseHelper.searchArticles(searchQuery);
+
+        if (searchResults.isEmpty()) {
+            showError("No articles found for the given search term.");
+        } else {
+            // Display the search results in the table
+            articleTable.setItems(searchResults);
+        }
+    }
+    private void showError(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
 
     // Event handler for clicking on a row in the table
     private void handleRowClick(MouseEvent event) {

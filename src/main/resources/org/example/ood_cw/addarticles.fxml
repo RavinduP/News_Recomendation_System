@@ -17,7 +17,7 @@
         </Label>
 
         <!-- User ID Label and TextField -->
-        <Label layoutX="82.0" layoutY="78.0" prefHeight="20.0" prefWidth="85.0" text="Article_ID : ">
+        <Label fx:id="lblarticleid" layoutX="82.0" layoutY="78.0" prefHeight="20.0" prefWidth="85.0" text="Article_ID : ">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
@@ -26,14 +26,14 @@
 
         <!-- Email Address Label -->
         <!-- Email Address Label and TextField -->
-        <Label layoutX="57.0" layoutY="240.0" prefHeight="20.0" prefWidth="74.0" text="Content">
+        <Label fx:id="lblContent" layoutX="57.0" layoutY="240.0" prefHeight="20.0" prefWidth="74.0" text="Content">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
         </Label>
 
         <!-- First Name Label and TextField -->
-        <Label layoutX="95.0" layoutY="122.0" prefHeight="20.0" prefWidth="41.0" text="Tittle">
+        <Label fx:id="lbltittle" layoutX="95.0" layoutY="122.0" prefHeight="20.0" prefWidth="41.0" text="Tittle">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
@@ -41,16 +41,13 @@
         <TextField fx:id="txtFirstName" layoutX="164.0" layoutY="119.0" prefHeight="26.0" prefWidth="251.0" />
 
         <!-- Add Button -->
-        <Button fx:id="btnAdd" layoutX="186.0" layoutY="517.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="74.0" text="Add" />
-
-        <!-- Remove Button -->
-        <Button fx:id="btnRemove" layoutX="443.0" layoutY="101.0" mnemonicParsing="false" text="Remove" />
+        <Button fx:id="btnAdd" layoutX="186.0" layoutY="517.0" mnemonicParsing="false" onAction="#handleAddButton" prefHeight="26.0" prefWidth="74.0" text="Add" />
 
         <!-- Back Button -->
         <Button fx:id="btnBack" layoutX="290.0" layoutY="517.0" mnemonicParsing="false" onAction="#navigateToContentManagement" text="Back" />
 
         <!-- Last Name Label and TextField -->
-        <Label layoutX="86.0" layoutY="156.0" prefHeight="20.0" prefWidth="66.0" text="Category">
+        <Label fx:id="lblcategory" layoutX="86.0" layoutY="156.0" prefHeight="20.0" prefWidth="66.0" text="Category">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
@@ -58,7 +55,7 @@
         <TextField fx:id="txtLastName" layoutX="164.0" layoutY="153.0" prefHeight="26.0" prefWidth="251.0" />
 
         <!-- User Name Label and TextField -->
-        <Label layoutX="60.0" layoutY="197.0" prefHeight="20.0" prefWidth="110.0" text="Published Date">
+        <Label fx:id="lblpublishdate" layoutX="60.0" layoutY="197.0" prefHeight="20.0" prefWidth="110.0" text="Published Date">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
@@ -66,7 +63,7 @@
         <TextField fx:id="txtUserName" layoutX="164.0" layoutY="194.0" prefHeight="26.0" prefWidth="251.0" />
 
         <!-- Check Button -->
-        <Button fx:id="btnCheck" layoutX="383.0" layoutY="75.0" mnemonicParsing="false" text="Check" />
-      <TextArea layoutX="165.0" layoutY="240.0" prefHeight="258.0" prefWidth="341.0" />
+        <Button fx:id="btnCheck" layoutX="383.0" layoutY="75.0" mnemonicParsing="false" onAction="#handleCheckButton" text="Check" />
+      <TextArea fx:id="txtContent" layoutX="165.0" layoutY="240.0" prefHeight="258.0" prefWidth="341.0" />
     </children>
 </AnchorPane>

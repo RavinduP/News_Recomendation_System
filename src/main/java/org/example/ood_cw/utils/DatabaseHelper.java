@@ -171,6 +171,51 @@ public class DatabaseHelper {
             return false; // If error occurs, return false
         }
     }
+    // Add an article to the database
+    public static boolean addArticle(int articleId, String title, String content, String category, String publishDate) {
+        String query = "INSERT INTO articles_dataset (article_id, title, content, category, publish_date) VALUES (?, ?, ?, ?, ?)";
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
+            preparedStatement.setInt(1, articleId);
+            preparedStatement.setString(2, title);
+            preparedStatement.setString(3, content);
+            preparedStatement.setString(4, category);
+            preparedStatement.setString(5, publishDate);
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public static ObservableList<Article> searchArticles(String searchTerm) {
+        ObservableList<Article> articles = FXCollections.observableArrayList();
+        String query = "SELECT article_id, title, content, category, publish_date FROM articles_dataset " +
+                "WHERE title LIKE ? OR content LIKE ?";  // Searching both title and content
 
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            // Use "%" for partial matching in SQL
+            preparedStatement.setString(1, "%" + searchTerm + "%");
+            preparedStatement.setString(2, "%" + searchTerm + "%");
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                String articleId = resultSet.getString("article_id");
+                String title = resultSet.getString("title");
+                String content = resultSet.getString("content");
+                String category = resultSet.getString("category");
+                String publishDate = resultSet.getString("publish_date");
+
+                articles.add(new Article(articleId, title, category, publishDate, content));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return articles;
+    }
 }

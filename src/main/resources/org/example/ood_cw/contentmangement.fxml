@@ -4,16 +4,15 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="696.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.ood_cw.Articles.ArticleController">
+<AnchorPane prefHeight="615.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.ood_cw.Articles.ArticleController">
     <children>
         <!-- Toolbar with category buttons -->
-        <ToolBar layoutX="18.0" layoutY="153.0" prefHeight="38.0" prefWidth="764.0">
+        <ToolBar layoutX="22.0" layoutY="120.0" prefHeight="38.0" prefWidth="764.0">
             <items>
                 <Button fx:id="btnAll" mnemonicParsing="false" onAction="#handleCategoryButtonAction" prefHeight="26.0" prefWidth="105.0" text="All" />
                 <Button fx:id="btnTechnology" mnemonicParsing="false" onAction="#handleCategoryButtonAction" prefHeight="26.0" prefWidth="105.0" text="Technology" />
@@ -24,21 +23,16 @@
                 <Button fx:id="btnFinance" mnemonicParsing="false" onAction="#handleCategoryButtonAction" prefHeight="26.0" prefWidth="116.0" text="Finance" />
             </items>
         </ToolBar>
-        <!-- Search Section -->
-        <Label layoutX="23.0" layoutY="122.0" text="Search Articles:" />
-        <TextField fx:id="searchTextField" layoutX="117.0" layoutY="118.0" prefWidth="400.0" />
-        <Button fx:id="searchButton" layoutX="527.0" layoutY="118.0" onAction="#handleSearchButtonAction" text="Search" />
-
 
         <!-- Main label -->
-        <Label layoutX="216.0" layoutY="14.0" text="Article Diary">
+        <Label layoutX="112.0" layoutY="14.0" prefHeight="90.0" prefWidth="642.0" text="Content management">
             <font>
                 <Font name="System Bold" size="62.0" />
             </font>
         </Label>
 
         <!-- Table for displaying articles -->
-        <TableView fx:id="articleTable" layoutX="103.0" layoutY="203.0" onSort="#initialize" prefHeight="400.0" prefWidth="601.0">
+        <TableView fx:id="articleTable" layoutX="70.0" layoutY="166.0" onSort="#initialize" prefHeight="400.0" prefWidth="601.0">
             <columns>
                 <TableColumn fx:id="colArticleId" prefWidth="75.0" text="Article_id" />
                 <TableColumn fx:id="colTitle" prefWidth="232.00001525878906" text="Title">
@@ -58,5 +52,8 @@
                 </TableColumn>
             </columns>
         </TableView>
+      <Button fx:id="btnRemove" layoutX="703.0" layoutY="264.0" mnemonicParsing="false" onAction="#navigateToRemoveArticle" text="Remove" />
+      <Button fx:id="btnAdd" layoutX="703.0" layoutY="316.0" mnemonicParsing="false" onAction="#navigateToAddArticle" text="Add" />
+      <Button fx:id="btnBack" layoutX="707.0" layoutY="366.0" mnemonicParsing="false" onAction="#navigateToAdmindash" text="Back" />
     </children>
 </AnchorPane>
