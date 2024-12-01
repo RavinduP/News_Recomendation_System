@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="610.0" prefWidth="821.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.ood_cw.Admindash">
+   <children>
+      <Pane layoutY="-2.0" prefHeight="618.0" prefWidth="209.0" style="-fx-background-color: blue;">
+         <children>
+            <ImageView fitHeight="104.0" fitWidth="92.0" layoutX="59.0" layoutY="22.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/user.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Button fx:id="btncontentmangement" layoutX="367.0" layoutY="269.0" mnemonicParsing="false" onAction="#navigateToContentManagement" text="content mangement" />
+      <Button fx:id="btnusermangement" layoutX="557.0" layoutY="269.0" mnemonicParsing="false" onAction="#navigateToUserManagement" text="user mangement" />
+   </children>
+</AnchorPane>
