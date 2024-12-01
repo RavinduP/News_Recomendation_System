@@ -2,7 +2,8 @@ package org.example.ood_cw.utils;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.example.ood_cw.Article;
+import org.example.ood_cw.Articles.Article;
+import org.example.ood_cw.models.User;
 
 import java.sql.*;
 
@@ -83,6 +84,7 @@ public class DatabaseHelper {
         // Implement your DB connection here
         return DriverManager.getConnection("your_database_url", "username", "password");
     }
+
     public static ObservableList<Article> getArticlesByCategory(String category) {
         ObservableList<Article> articles = FXCollections.observableArrayList();
         String query;
@@ -120,8 +122,55 @@ public class DatabaseHelper {
     }
 
     public static Article getArticleByIdOrTitle(String articleId, String title) {
-        return null;
+        String query = "SELECT article_id, title, content, category, publish_date FROM articles_dataset WHERE article_id = ? OR title = ?";
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, articleId);
+            preparedStatement.setString(2, title);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                String id = resultSet.getString("article_id");
+                String articleTitle = resultSet.getString("title");
+                String content = resultSet.getString("content");
+                String category = resultSet.getString("category");
+                String publishDate = resultSet.getString("publish_date");
+
+                // Create and return an Article object
+                return new Article(id, articleTitle, category, publishDate, content);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null; // Return null if no article is found
     }
+    public static boolean articleExists(String articleId) {
+        String query = "SELECT * FROM articles_dataset WHERE article_id = ?";
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, articleId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return resultSet.next(); // If article exists, return true
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false; // If error occurs, return false
+        }
+    }
+    public static boolean removeArticle(String articleId) {
+        String query = "DELETE FROM articles_dataset WHERE article_id = ?";
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, articleId);
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0; // If any rows are affected, return true (article removed)
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false; // If error occurs, return false
+        }
+    }
+
+
 }
-
-

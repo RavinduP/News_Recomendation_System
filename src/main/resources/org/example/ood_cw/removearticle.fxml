@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="416.0" prefWidth="533.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.ood_cw.RemoveArticles">
+    <children>
+        <!-- Title label -->
+        <Label fx:id="iblremovearticles" layoutX="82.0" layoutY="28.0" prefHeight="35.0" prefWidth="282.0" text="REMOVE ARTICLES">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font>
+        </Label>
+
+        <!-- User ID Label and TextField -->
+        <Label fx:id="lblMessage" layoutX="82.0" layoutY="78.0" prefHeight="20.0" prefWidth="85.0" text="Article_ID : ">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Label>
+        <TextField fx:id="txtlabelArticleid" layoutX="164.0" layoutY="76.0" prefHeight="26.0" prefWidth="178.0" />
+
+        <!-- Add Button -->
+        <Button fx:id="btnRemove" layoutX="158.0" layoutY="142.0" mnemonicParsing="false" onAction="#handleRemoveButtonAction" prefHeight="26.0" prefWidth="74.0" text="Remove" />
+
+        <!-- Back Button -->
+        <Button fx:id="btnBack" layoutX="301.0" layoutY="143.0" mnemonicParsing="false" onAction="#navigateToContentManagement" text="Back" />
+
+        <!-- Check Button -->
+        <Button fx:id="btnCheck" layoutX="364.0" layoutY="75.0" mnemonicParsing="false" onAction="#handleCheckButtonAction" text="Check" />
+    </children>
+</AnchorPane>

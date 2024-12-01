@@ -1,4 +1,4 @@
-package org.example.ood_cw;
+package org.example.ood_cw.Articles;
 
 import javafx.beans.property.SimpleStringProperty;
 

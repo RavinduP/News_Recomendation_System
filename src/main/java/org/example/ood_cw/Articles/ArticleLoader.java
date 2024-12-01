@@ -1,7 +1,8 @@
-package org.example.ood_cw;
+package org.example.ood_cw.Articles;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.example.ood_cw.Articles.Article;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

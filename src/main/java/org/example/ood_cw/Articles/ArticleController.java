@@ -1,18 +1,20 @@
-package org.example.ood_cw;
+package org.example.ood_cw.Articles;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Button;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import org.example.ood_cw.utils.DatabaseHelper;
+
+import java.io.IOException;
 
 public class ArticleController {
 
@@ -75,7 +77,10 @@ public class ArticleController {
 
             // Get the controller for ArticleDetails
             ArticleDetails articleDetailsController = loader.getController();
-            articleDetailsController.loadArticleDetails(selectedArticle);  // Pass the selected article
+
+            // Assuming you already have the full list of articles
+            ObservableList<Article> allArticles = DatabaseHelper.getArticlesByCategory("All"); // Modify as needed
+            articleDetailsController.loadArticles(allArticles); // Pass the full list of articles
 
             // Set up the new scene and stage
             Stage stage = (Stage) articleTable.getScene().getWindow();  // Get the current stage
@@ -86,6 +91,7 @@ public class ArticleController {
             e.printStackTrace();
         }
     }
+
 
     private void loadArticles(String category) {
         // Fetch articles from the database
@@ -101,5 +107,47 @@ public class ArticleController {
         Button clickedButton = (Button) event.getSource();
         String category = clickedButton.getText(); // Get the button's text
         loadArticles(category); // Load articles for the category
+    }
+    public void navigateToRemoveArticle(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/ood_cw/removearticle.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Content Management");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void navigateToAddArticle(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/ood_cw/addarticles.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Content Management");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void navigateToAdmindash(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/ood_cw/Admindash.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Admin Dashboard");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
