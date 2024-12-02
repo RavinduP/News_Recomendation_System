@@ -218,4 +218,33 @@ public class DatabaseHelper {
 
         return articles;
     }
+
+    // Add this method to the DatabaseHelper class
+    // Change this in DatabaseHelper.java
+    public static ObservableList<User> getAllUsers() {
+        ObservableList<User> users = FXCollections.observableArrayList();
+        // Updated query to use userId instead of user_id
+        String query = "SELECT userId, firstName, lastName, userName, email FROM users";
+
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(query);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+                String userId = resultSet.getString("userId");
+                String firstName = resultSet.getString("firstName");
+                String lastName = resultSet.getString("lastName");
+                String userName = resultSet.getString("userName");
+                String email = resultSet.getString("email");
+
+                users.add(new User(userId, firstName, lastName, userName, email));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return users;
+    }
+
 }
+

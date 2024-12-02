@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -14,6 +15,7 @@ import javafx.scene.Parent;
 import org.example.ood_cw.utils.DatabaseHelper;
 
 import java.io.IOException;
+import java.util.List;
 
 public class ArticleController {
 
@@ -48,7 +50,6 @@ public class ArticleController {
     @FXML
     private Button btnFinance;
 
-
     @FXML
     private void initialize() {
         // Setup columns in the table
@@ -58,14 +59,35 @@ public class ArticleController {
         colPublishDate.setCellValueFactory(new PropertyValueFactory<>("publishDate"));
 
         // Handle double-click on article row
-        articleTable.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2) { // Check if double-clicked
-                Article selectedArticle = articleTable.getSelectionModel().getSelectedItem();
-                if (selectedArticle != null) {
-                    navigateToArticleDetails(selectedArticle);
+        articleTable.setRowFactory(tv -> {
+            TableRow<Article> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (!row.isEmpty() && event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
+                    Article clickedArticle = row.getItem(); // Get the clicked article
+                    loadArticleDetailView(clickedArticle);
                 }
-            }
+            });
+            return row;
         });
+    }
+    private void loadArticleDetailView(Article article) {
+        try {
+            // Load the ArticleDetail.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/ood_cw/ArticleDetails.fxml"));
+            Parent root = loader.load();
+
+            // Get the controller of ArticleDetails and set the article data
+            ArticleDetails controller = loader.getController();
+            controller.setArticleDetails(article);
+
+            // Open the ArticleDetail view in a new stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Article Details");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -175,7 +197,7 @@ public class ArticleController {
     }
     public void navigateToAdmindash(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/ood_cw/Admindash.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/ood_cw/UserArticle.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -187,4 +209,5 @@ public class ArticleController {
             e.printStackTrace();
         }
     }
+
 }

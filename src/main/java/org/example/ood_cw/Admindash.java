@@ -1,18 +1,70 @@
 package org.example.ood_cw;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.SortEvent;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
+import org.example.ood_cw.models.User;
+import org.example.ood_cw.utils.DatabaseHelper;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class Admindash {
+public class Admindash implements Initializable {
+    @FXML
+    private TableView<User> articleTable; // Renamed to match the existing FXML
+
+    @FXML
+    private TableColumn<User, String> colUserId;
+
+    @FXML
+    private TableColumn<User, String> colFirstName;
+
+    @FXML
+    private TableColumn<User, String> colLastName;
+
+    @FXML
+    private TableColumn<User, String> colUserName;
+
+    @FXML
+    private TableColumn<User, String> colEmail;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        // Add null checks
+        if (colUserId == null) {
+            return;
+        }
+        if (colFirstName == null) {
+            return;
+        }
+        // ... similar checks for other columns
+
+        // Set up the table columns
+        colUserId.setCellValueFactory(cellData -> cellData.getValue().userIdProperty());
+        colFirstName.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
+        colLastName.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
+        colUserName.setCellValueFactory(cellData -> cellData.getValue().userNameProperty());
+        colEmail.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
+
+        // Load users into the table
+        loadUsers();
+    }
+
+    private void loadUsers() {
+        ObservableList<User> users = DatabaseHelper.getAllUsers();
+        articleTable.setItems(users);
+    }
+
 
     // Method to navigate to the User Management screen
     public void navigateToUserManagement(ActionEvent event) {
@@ -87,3 +139,4 @@ public class Admindash {
     }
 
 }
+

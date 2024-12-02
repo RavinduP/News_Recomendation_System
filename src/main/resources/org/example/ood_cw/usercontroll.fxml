@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="533.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.ood_cw.Admindash">
+<AnchorPane prefHeight="400.0" prefWidth="533.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.ood_cw.RemoveUsers">
     <children>
         <!-- Title label -->
         <Label layoutX="82.0" layoutY="28.0" prefHeight="35.0" prefWidth="282.0" text="User Management">
@@ -41,10 +41,10 @@
         <TextField fx:id="txtFirstName" layoutX="164.0" layoutY="119.0" prefHeight="26.0" prefWidth="251.0" />
 
         <!-- Add Button -->
-        <Button fx:id="btnAdd" layoutX="168.0" layoutY="279.0" mnemonicParsing="false" onAction="#navigateToUserController" prefHeight="26.0" prefWidth="74.0" text="Add" />
+        <Button fx:id="btnAdd" layoutX="168.0" layoutY="279.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="74.0" text="Add" />
 
         <!-- Remove Button -->
-        <Button fx:id="btnRemove" layoutX="300.0" layoutY="280.0" mnemonicParsing="false" onAction="#navigateToUserController" text="Remove" />
+        <Button fx:id="btnRemove" layoutX="300.0" layoutY="280.0" mnemonicParsing="false" text="Remove" />
 
         <!-- Back Button -->
         <Button fx:id="btnBack" layoutX="423.0" layoutY="280.0" mnemonicParsing="false" onAction="#navigateToUserManagement" text="Back" />
@@ -66,6 +66,6 @@
         <TextField fx:id="txtUserName" layoutX="164.0" layoutY="194.0" prefHeight="26.0" prefWidth="251.0" />
 
         <!-- Check Button -->
-        <Button fx:id="btnCheck" layoutX="383.0" layoutY="75.0" mnemonicParsing="false" onAction="#handleCheckButton" text="Check" />
+        <Button fx:id="btnCheck" layoutX="383.0" layoutY="75.0" mnemonicParsing="false" text="Check" />
     </children>
 </AnchorPane>

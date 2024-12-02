@@ -76,19 +76,59 @@ public class ArticleDetails {
 
     @FXML
     private void handleSkipButton(ActionEvent event) {
-        // Load the next article if available
-        if (articles != null && !articles.isEmpty() && currentArticleIndex < articles.size() - 1) {
-            currentArticleIndex++; // Move to the next article
-            loadArticleDetails(articles.get(currentArticleIndex)); // Load the next article
+        if (articles == null || articles.isEmpty()) {
+            showError("No articles available to navigate.");
+            return;
         }
+
+        // Get the current article ID
+        String currentArticleId = txtArticleId.getText().trim();
+
+        // Find the next article by ID
+        for (int i = 0; i < articles.size(); i++) {
+            if (articles.get(i).getArticleId().equals(currentArticleId) && i < articles.size() - 1) {
+                // Load the next article
+                loadArticleDetails(articles.get(i + 1));
+                return;
+            }
+        }
+
+        showError("You are already viewing the last article.");
     }
 
     @FXML
     private void handleBackButton(ActionEvent event) {
-        // Load the previous article if available
-        if (articles != null && !articles.isEmpty() && currentArticleIndex > 0) {
-            currentArticleIndex--; // Move to the previous article
-            loadArticleDetails(articles.get(currentArticleIndex)); // Load the previous article
+        if (articles == null || articles.isEmpty()) {
+            showError("No articles available to navigate.");
+            return;
+        }
+
+        // Get the current article ID
+        String currentArticleId = txtArticleId.getText().trim();
+
+        // Find the previous article by ID
+        for (int i = 0; i < articles.size(); i++) {
+            if (articles.get(i).getArticleId().equals(currentArticleId) && i > 0) {
+                // Load the previous article
+                loadArticleDetails(articles.get(i - 1));
+                return;
+            }
+        }
+
+        showError("You are already viewing the first article.");
+    }
+    public void navigateToUserArticle(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/ood_cw/UserArticle.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Admin Dashboard");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -102,19 +142,13 @@ public class ArticleDetails {
         alert.setContentText(message);
         alert.showAndWait();
     }
-    public void navigateToUserArticle(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/ood_cw/UserArticle.fxml"));
-            Parent root = loader.load();
 
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setTitle("user Dashboard");
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void setArticleDetails(Article article) {
+        txtArticleId.setText(String.valueOf(article.getArticleId()));
+        txtTitle.setText(article.getTitle());
+        txtCategory.setText(article.getCategory());
+        txtPublishedDate.setText(article.getPublishDate().toString());
+        txtContent.setText(article.getContent());
     }
 
 }
